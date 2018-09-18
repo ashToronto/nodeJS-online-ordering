@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="welcome.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="js/scripts.js"></script>
+</head>
+
+<body>
+  <h1>Welcome</h1>
+  <body>
+    <div>
+    <div>
+      <a href="/clients/shoppers">Shoppers</a>
+      <button class="modal-link">click here</button>
+    </div>
+      <div>
+      <div class="modal" style="display: none;">
+	       <p>Some random modal content</p>
+         <a href="/admin/panel">BIZZ OWNERS</a>
+         <button class="close">close</button>
+        </div>
+        <div class="modal-bg" style="display: none;"></div>
+      </div>
+    </div>
+  </body>
+</body>
+
+</html>
+
+
+<script>
+// -----------------LOAD MODAL---------------------
+$(document).ready(function() {
+  $('.modal-link').click(function() {
+    $('.modal').show();
+    $('.modal-bg').show();
+  });
+  $('.modal .close').click(function() {
+    $('.modal').hide();
+    $('.modal-bg').hide();
+  })
+})
+
+</script>
