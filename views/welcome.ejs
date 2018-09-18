@@ -12,16 +12,8 @@
     <div>
     <div>
       <a href="/clients/shoppers">Shoppers</a>
-      <button class="modal-link">click here</button>
+      <a href="/admin/panel">Shoppers</a>
     </div>
-      <div>
-      <div class="modal" style="display: none;">
-	       <p>Some random modal content</p>
-         <a href="/admin/panel">BIZZ OWNERS</a>
-         <button class="close">close</button>
-        </div>
-        <div class="modal-bg" style="display: none;"></div>
-      </div>
     </div>
   </body>
 </body>
@@ -34,12 +26,15 @@
 $(document).ready(function() {
   $('.modal-link').click(function() {
     $('.modal').show();
-    $('.modal-bg').show();
   });
   $('.modal .close').click(function() {
     $('.modal').hide();
-    $('.modal-bg').hide();
   })
+  $( "#signup" ).click(function() {
+  alert( "Signup clicked" );
+});
+$( "#login" ).click(function() {
+alert( "login clicked" );
+});
 })
-
 </script>
