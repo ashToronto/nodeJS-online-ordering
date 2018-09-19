@@ -9,6 +9,21 @@
 
   <body>
     <h1>Admin Panel</h1>
+    <form action='/admin/logout' method='POST'>
+          <input type="submit" value="logout" name="username" size="40">
+      </form>
     <p>CREATE ITEMS AND TAKE ORDERS GOES HERE</p>
+    <form method="POST" action="admin/add" class = "standard" id="menuform">
+      <h1>Add Menu Item</h1>
+        Menu Item:<br>
+        <input type="text" name="name"><br>
+        Price:<br>
+        <input type="number" name="price" step="0.25" min = "0"><br>
+        Photo URL:<br>
+        <input type="text" name="photo_url"><br>
+        Description:<br>
+        <textarea name="description" rows="4" cols="50" form="menuform"></textarea></br>
+      <input type="submit" id="submit" value="Add Item">
+    </form>
     </body>
 </html>

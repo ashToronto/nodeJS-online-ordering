@@ -83,7 +83,31 @@ module.exports = (knex) => {
 // *********** LOGOUT  *************
 router.post('/logout', (req, res) => {
 req.session = null;
-res.redirect("welcome")
+res.redirect("/")
 })
+
+
+// *********** CREATING MENU ITEMS  *************
+// Add a new menu item
+router.post('/add', (req, res) => {
+  res.status(200);
+  const name = req.body.name;
+  const description = req.body.description;
+  const item_price = parseFloat(req.body.price);
+  const photo_url = req.body.photo_url;
+  Item.create_item(name, description, item_price, discount, picture_file, quantity)
+  .then(() => {
+    console.log("done");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+  res.redirect("/");
+});
+
+
+
+
+
   return router;
 }
