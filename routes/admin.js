@@ -12,18 +12,18 @@ module.exports = (knex) => {
 
   // LOGIN
   router.get("/login", (req, res) => {
-    const templateVars = {
-      username: req.session["user_id"]
-    }
-    res.render("login", templateVars)
-    return;
+    res.render("login")
   });
   // Admin panel page for business owners
   router.get("/panel", (req, res) => {
     res.render("admin");
   });
 
-
+  router.get("/add", (req, res) => {
+    if(req.session.user_id){
+    res.render("create_item");
+    }
+  });
 
   // *********** REGISTRATION AND VALIDATION  *************
     router.post('/register', (req, res) => {
@@ -95,19 +95,23 @@ router.post('/add', (req, res) => {
   const description = req.body.description;
   const item_price = parseFloat(req.body.price);
   const photo_url = req.body.photo_url;
-  Item.create_item(name, description, item_price, discount, picture_file, quantity)
+  console.log(name)
+  return (
+  knex("items")
+  .insert({
+    name: req.body.name,
+    description: req.body.description,
+    price: parseFloat(req.body.price),
+    photo_URL: req.body.photo_url,
+  })
+)
   .then(() => {
-    console.log("done");
+    console.log("created a new item");
   })
   .catch((err) => {
     console.log(err);
   });
-  res.redirect("/");
+  res.redirect("/admin/panel");
 });
-
-
-
-
-
   return router;
 }
