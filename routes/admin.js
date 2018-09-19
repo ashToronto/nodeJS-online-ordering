@@ -14,15 +14,22 @@ module.exports = (knex) => {
   router.get("/login", (req, res) => {
     res.render("login")
   });
-  // Admin panel page for business owners
+  // ADMIN PANEL HOME PAGE
   router.get("/panel", (req, res) => {
+    if(req.session.user_id){
     res.render("admin");
+  } else {
+    res.redirect("/")
+  }
   });
 
+  // ADD TO CATELOGUE PAGE
   router.get("/add", (req, res) => {
     if(req.session.user_id){
     res.render("create_item");
-    }
+  } else {
+    res.redirect("/")
+  }
   });
 
   // *********** REGISTRATION AND VALIDATION  *************
