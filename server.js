@@ -1,11 +1,24 @@
 const express         = require("express");
 const PORT            = 8080;
 const bodyParser      = require("body-parser");
+const cookieSession   = require("cookie-session");
+const bcrypt          = require('bcryptjs');
 const app             = express();
 const configuration   = require('./knexfile.js')['development']
 const knex            = require('knex')(configuration);
 
+
 app.set("view engine", "ejs");
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
+
+//Cookie sessions
+app.use(cookieSession({
+ name: 'session',
+ keys: ['hothot'],
+}))
 
 // Serve css files
 app.use(express.static(__dirname + '/stylesheets'));
