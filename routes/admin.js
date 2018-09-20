@@ -29,7 +29,6 @@ module.exports = (knex) => {
   // CREATE ITEMS FOR CLIENT CATALOGUE
   router.get("/add", (req, res) => {
     if (req.session.user_id) {
-
       res.render("create_item");
     } else {
       res.redirect("/")
@@ -74,7 +73,7 @@ module.exports = (knex) => {
             }])
             .then(function(id) {
               req.session.user_id = id[0];
-              res.render("admin");
+              res.redirect("panel");
               return;
             }).catch(function(error) {
               console.error('Error: Inserting the user', error)
@@ -100,7 +99,7 @@ module.exports = (knex) => {
         if (bcrypt.compareSync(req.body.password, data[0].password)) {
           console.log('results is', data);
           req.session.user_id = data[0].id;
-          res.render("admin");
+          res.redirect("panel");
           return;
         } else {
           res.render("register");
@@ -123,6 +122,7 @@ module.exports = (knex) => {
   // Add a new menu item
   router.post('/add', (req, res) => {
     res.status(200);
+    console.log("THE SESSION ID/ ADMIN ID IS: ", id)
     const name = req.body.name;
     const description = req.body.description;
     const item_price = parseFloat(req.body.price);
@@ -132,6 +132,7 @@ module.exports = (knex) => {
         knex("items")
         .insert({
           name: req.body.name,
+          admin_id: req.body.id,
           description: req.body.description,
           price: parseFloat(req.body.price),
           photo_URL: req.body.photo_url,

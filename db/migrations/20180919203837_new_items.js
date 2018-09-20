@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('items', (table, Promise) => {
       table.increments('item_id').primary();
+      table.string('admin_id').notNullable;
       table.string('name').notNullable;
       table.string('description');
       table.decimal('price').notNullable;
