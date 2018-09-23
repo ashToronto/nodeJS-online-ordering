@@ -22,9 +22,9 @@
     </div>
     <div>
       <% for (i in data){ %>
-        <p> "<%= data[i].item_name %>" </p>
-        <p> "<%= data[i].item_description %>" </p>
-        <p> $"<%= data[i].item_price %>" </p>
+        <p> <%= data[i].item_name %> </p>
+        <p> <%= data[i].item_description %> </p>
+        <p> $ <%= data[i].item_price %> </p>
         <form method="post" action="/admin/items/delete">
         <input type="text" name="item_id" value= "<%= data[i].item_id %>" readonly>
         <input type="submit" value="DELETE">

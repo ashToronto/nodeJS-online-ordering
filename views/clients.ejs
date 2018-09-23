@@ -12,6 +12,13 @@
 <body>
   <h1>Ultimate Deal</h1>
   <body>
+    <div>
+      <% for (i in data){ %>
+        <p> <%= data[i].item_name %> </p>
+        <p> <%= data[i].item_description %> </p>
+        <p> $ <%= data[i].item_price %> </p>
+        <% } %>
+    </div>
   </body>
 </body>
 
