@@ -6,7 +6,7 @@ module.exports = (knex) => {
 
   // ********************** ALL AVAILABLE ADMIN PATHS - GET REQUESTS ************************
 
-  // ADMIN PANEL HOME PAGE
+  // ADMIN PANEL HOME PAGE - GET REQUEST
   router.get("/panel", (req, res) => {
     if (req.session.user_id) {
       res.render("admin");
@@ -15,7 +15,7 @@ module.exports = (knex) => {
     }
   });
 
-  // ADMIN REGISTRATION
+  // ADMIN REGISTRATION - GET REQUEST
   router.get("/register", (req, res) => {
     res.status(200);
     res.render("register");
@@ -26,7 +26,8 @@ module.exports = (knex) => {
     res.render("login")
   });
 
-  // CREATE ITEMS FOR CLIENT CATALOGUE
+  // ********** CREATE ITEMS FOR CLIENT CATALOGUE - GET REQUEST **************
+  // used templating to add id as a form field for post insert
   router.get("/add", (req, res) => {
     if (req.session.user_id) {
       const templateVars = {id: req.session.user_id}
@@ -36,7 +37,7 @@ module.exports = (knex) => {
     }
   });
 
-  // ADMIN ITEM MANAGEMENT
+  // ****************** ADMIN ITEM MANAGEMENT - GET REQUEST ******************
   router.get("/items", (req, res) => {
     if (req.session.user_id) {
       knex.select("*")
@@ -44,7 +45,8 @@ module.exports = (knex) => {
       .where("admin_id", "=", req.session.user_id)
       .then(data => {
         console.log(data)
-        res.render("admin_item_catelogue")
+        const templateVars = {data: data}
+        res.render("admin_item_catelogue", templateVars)
       })
     } else {
       res.redirect("/")
@@ -116,7 +118,6 @@ module.exports = (knex) => {
     res.redirect("/")
   })
 
-
   // *********** CREATING ITEMS FOR CLIENT CATELOGUE - POST REQUEST  *************
   // Add a new menu item
   router.post('/add', (req, res) => {
@@ -145,6 +146,18 @@ module.exports = (knex) => {
         console.log(err);
       });
   });
+
+  // *********** DELETING ITEMS FROM CLIENT CATELOGUE - POST REQUEST  *************
+  router.post('/items/delete', (req, res) => {
+  const id = req.body.item_id
+  knex("items")
+  .where("item_id", "=", id)
+  .del()
+  .then(() => {
+    console.log("DELETE ITEM" + id);
+    res.redirect("http://localhost:8080/admin/items")
+  })
+});
 
   return router;
 }
