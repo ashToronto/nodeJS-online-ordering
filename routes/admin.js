@@ -9,8 +9,7 @@ module.exports = (knex) => {
   // ADMIN PANEL HOME PAGE
   router.get("/panel", (req, res) => {
     if (req.session.user_id) {
-      const templateVars = {id: req.session.user_id}
-      res.render("admin", templateVars);
+      res.render("admin");
     } else {
       res.redirect("/")
     }
@@ -40,15 +39,13 @@ module.exports = (knex) => {
   // ADMIN ITEM MANAGEMENT
   router.get("/items", (req, res) => {
     if (req.session.user_id) {
-      knex("items")
-      .select("*")
-      .then((data) => {
+      knex.select("*")
+      .from("items")
+      .where("admin_id", "=", req.session.user_id)
+      .then(data => {
         console.log(data)
-        res.json("ITEM INFO LIST: ", data)
-      })
-      .then = () => {
         res.render("admin_item_catelogue")
-      }
+      })
     } else {
       res.redirect("/")
     }

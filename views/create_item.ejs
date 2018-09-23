@@ -8,10 +8,15 @@
   </head>
 
   <body>
-    <h1>Create Menu items</h1>
+    <div>
     <form action='/admin/logout' method='POST'>
           <input type="submit" value="logout" name="username" size="40">
       </form>
+      <button>
+        <a href="/admin/items">Item manager</a>
+      </button>
+    </div>
+    <h1>Create Menu items</h1>
     <p>CREATE ITEMS AND TAKE ORDERS GOES HERE</p>
     <form method="POST" action="/admin/add" class = "standard" id="menuform">
        <h1>Add Menu Item</h1>
