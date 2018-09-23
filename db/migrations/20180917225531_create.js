@@ -10,8 +10,9 @@ exports.up = function(knex, Promise) {
       table.timestamp('created_at').notNullable().defaultTo(knex.raw('now()'));
     })
   ])
-};
 
-exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('owner');
-};
+  };
+
+  exports.down = function(knex, Promise) {
+    knex.schema.dropTable('owner');
+  };

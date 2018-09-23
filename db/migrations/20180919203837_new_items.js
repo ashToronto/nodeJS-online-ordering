@@ -5,15 +5,15 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('items', (table, Promise) => {
       table.increments('item_id').primary();
       table.string('admin_id').notNullable;
-      table.string('name').notNullable;
-      table.string('description');
-      table.decimal('price').notNullable;
-      table.string('photo_URL').notNullable;
+      table.string('item_name').notNullable;
+      table.string('item_description');
+      table.decimal('item_price').notNullable;
+      table.string('item_photo_URL').notNullable;
     })
   ])
 
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('items');
+   knex.schema.dropTable('items');
 };

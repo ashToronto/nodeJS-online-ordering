@@ -14,7 +14,9 @@
       </form>
     <p>CREATE ITEMS AND TAKE ORDERS GOES HERE</p>
     <form method="POST" action="/admin/add" class = "standard" id="menuform">
-      <h1>Add Menu Item</h1>
+       <h1>Add Menu Item</h1>
+       Admin id se as:<br>
+       <input type="text" name="user_id" value= "<%= id %>" readonly><br>
         Menu Item:<br>
         <input type="text" name="name"><br>
         Price:<br>
