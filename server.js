@@ -1,5 +1,5 @@
 const express         = require("express");
-const PORT            = 8080;
+const PORT            = 5000;
 const bodyParser      = require("body-parser");
 const cookieSession   = require("cookie-session");
 const bcrypt          = require('bcryptjs');
@@ -20,7 +20,7 @@ app.use(cookieSession({
  keys: ['hothot'],
 }))
 
-// Serve css files
+// Serve css files to ejs views
 app.use(express.static(__dirname + '/stylesheets'));
 
 // Seperated Routes for each Resource

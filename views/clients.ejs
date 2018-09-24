@@ -3,23 +3,35 @@
 
 <head>
   <title>clients</title>
-  <link rel="stylesheet" type="text/css" href="welcome.css" />
+  <link rel="stylesheet" type="text/css" href="/clients.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="js/scripts.js"></script>
-
 </head>
 
 <body>
   <h1>Ultimate Deal</h1>
-  <body>
-    <div>
-      <% for (i in data){ %>
-        <p> <%= data[i].item_name %> </p>
-        <p> <%= data[i].item_description %> </p>
-        <p> $ <%= data[i].item_price %> </p>
-        <% } %>
-    </div>
-  </body>
+
+
+  <div class="grid-container">
+    <% for (i in data){ %>
+      <td>
+        <div class="grid-item ">
+          <p> <strong> <%= data[i].item_name %> </strong></p>
+          <div>
+            <p> $
+              <%= data[i].item_price %>
+            </p>
+            <img class="photo" src="<%= data[i].item_photo_URL %>" />
+          </div>
+          <p>
+            <%= data[i].item_description %>
+          </p>
+        </div>
+      </td>
+      <% } %>
+        <div>
+
+
 </body>
 
 </html>

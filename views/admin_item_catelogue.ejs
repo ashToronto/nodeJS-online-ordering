@@ -6,20 +6,12 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
-
+  <div>
+    <%- include partials/admin_navbar.ejs %>
+    <br><br><br><br><br><br><br><br><br><br><br>
+  </div>
   <body>
     <h1>ADMIN ITEMS PAGE</h1>
-    <div>
-    <form action='/admin/logout' method='POST'>
-          <input type="submit" value="logout" name="username" size="40">
-      </form>
-      <button>
-        <a href="/admin/items">Item manager</a>
-      </button>
-      <button>
-        <a href="/admin/add">Add another item</a>
-      </button>
-    </div>
     <div>
       <% for (i in data){ %>
         <p> <%= data[i].item_name %> </p>

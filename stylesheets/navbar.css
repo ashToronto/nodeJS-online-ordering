@@ -1,0 +1,92 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; //1 rem = 10px, 10px/16px = 62.5%;
+}
+
+.nav {
+    padding: 10px;
+    margin: auto;
+    align: center;
+    display: flex;
+    width: 100%;
+    background: rgb(53, 5, 49);
+    height: 7rem;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-shadow: 0px 0px 55px 8px rgba(247,74,103,0.83);
+    -moz-box-shadow: 0px 0px 55px 8px rgba(247,74,103,0.83);
+    box-shadow: 0px 0px 55px 8px rgba(247,74,103,0.83);
+    border: 1px solid #ff00c8;
+}
+
+.main-nav-box {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    align-self: stretch;
+}
+
+.main-nav-item {
+    list-style: none;
+    /* background: red; */
+}
+
+.main-nav-link:link,
+.main-nav-link:visited {
+    text-decoration: none;
+    color: #ff00c8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    padding: 0 2rem;
+    position: relative;
+    /* background: red; */
+}
+
+.main-nav-link::before {
+    content: '';
+    width: 100%;
+    height: 3px;
+    text-align: center;
+    background: rgb(251, 255, 0);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transition: transform .3s .2s cubic-bezier(1,0,0,1);
+    transform-origin: left;
+}
+
+.main-nav-link:hover::before {
+    transform: scaleX(1);
+}
+
+.button {
+  padding: 7px 9px;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}

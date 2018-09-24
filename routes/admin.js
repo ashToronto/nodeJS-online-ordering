@@ -140,7 +140,7 @@ module.exports = (knex) => {
       )
       .then(() => {
         console.log("created a new item");
-        res.redirect("/admin/panel");
+        res.redirect("items");
       })
       .catch((err) => {
         console.log(err);

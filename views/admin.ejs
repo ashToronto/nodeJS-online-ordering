@@ -8,18 +8,8 @@
   </head>
 
   <body>
+    <%- include partials/admin_navbar.ejs %>
+    <br><br><br><br><br><br><br>
     <h1>Admin Panel</h1>
-    <div>
-    <form action='/admin/logout' method='POST'>
-          <input type="submit" value="logout" name="username" size="40">
-      </form>
-      <button>
-        <a href="/admin/items">Item manager</a>
-      </button>
-    </div>
-    <p>CREATE ITEMS AND TAKE ORDERS GOES HERE</p>
-    <button>
-      <a href="/admin/add">Add a product</a>
-</button>
     </body>
 </html>
