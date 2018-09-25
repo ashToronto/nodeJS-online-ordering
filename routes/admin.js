@@ -155,7 +155,7 @@ module.exports = (knex) => {
   .del()
   .then(() => {
     console.log("DELETE ITEM" + id);
-    res.redirect("http://localhost:8080/admin/items")
+    res.redirect("http://localhost:5000/admin/items")
   })
 });
 

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>Admin</title>
-    <link rel="stylesheet" type="text/css" href="/clients.css" />
+    <link rel="stylesheet" type="text/css" href="/admin_items.css" />
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
@@ -10,19 +10,29 @@
     <%- include partials/admin_navbar.ejs %>
     <br><br><br><br><br><br><br><br><br><br><br>
   </div>
+
   <body>
     <h1>ADMIN ITEMS PAGE</h1>
     <div>
+      <table>
+        <tr>
       <% for (i in data){ %>
-        <p> <%= data[i].item_name %> </p>
-        <p> <%= data[i].item_description %> </p>
-        <p> $ <%= data[i].item_price %> </p>
+      <td>
+        <td><p> <%= data[i].item_name %> </p></td>
+        <td><p> <%= data[i].item_description %> </p></td>
+        <td><p> $ <%= data[i].item_price %> </p></td>
+        <td>
         <form method="post" action="/admin/items/delete">
         <input type="text" name="item_id" value= "<%= data[i].item_id %>" readonly>
         <input type="submit" value="DELETE">
         <br>
+      </td>
+      <tr></tr>
       </form>
         <% } %>
+          </tr>
+      </table>
     </div>
     </body>
+
 </html>

@@ -2,7 +2,7 @@ exports.up = function(knex, Promise) {
 
   // CREATES ADMIN TABLE
   return Promise.all([
-    knex.schema.createTable('owner', (table, Promise) => {
+    knex.schema.createTableIfNotExists('owner', (table, Promise) => {
       table.increments('id').primary()
       table.string('username').notNullable;
       table.string('email').notNullable;
@@ -10,9 +10,8 @@ exports.up = function(knex, Promise) {
       table.timestamp('created_at').notNullable().defaultTo(knex.raw('now()'));
     })
   ])
-
   };
 
   exports.down = function(knex, Promise) {
-    knex.schema.dropTable('owner');
+    knex.schema.dropTableIfExists('owner')
   };

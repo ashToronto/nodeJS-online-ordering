@@ -11,7 +11,7 @@
 <body>
   <h1>Ultimate Deal</h1>
 
-
+<div class="master-items--container">
   <div class="grid-container">
     <% for (i in data){ %>
       <td>
@@ -20,16 +20,19 @@
             <img class="photo" src="<%= data[i].item_photo_URL %>" />
           </div>
           <p> <strong> <%= data[i].item_name %> </strong></p>
+
+          <p class="shopper-text">
+            <%= data[i].item_description %>
+          </p>
           <p> $
             <%= data[i].item_price %>
           </p>
-          <p>
-            <%= data[i].item_description %>
-          </p>
+
         </div>
       </td>
       <% } %>
-        <div>
+    </div>
+          </div>
 
 
 </body>

@@ -2,7 +2,7 @@ exports.up = function(knex, Promise) {
 
   // ADMIN CAN CREATE ITEMS FOR CLIENTS
   return Promise.all([
-    knex.schema.createTable('items', (table, Promise) => {
+    knex.schema.createTableIfNotExists('items', (table, Promise) => {
       table.increments('item_id').primary();
       table.string('admin_id').notNullable;
       table.string('item_name').notNullable;
@@ -15,5 +15,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-   knex.schema.dropTable('items');
+  knex.schema.dropTableIfExists('items')
 };
