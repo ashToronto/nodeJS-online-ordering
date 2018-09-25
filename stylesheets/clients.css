@@ -5,15 +5,24 @@
   grid-auto-rows: minmax(100px, auto);
 }
 .grid-item {
-  padding: 20px;
   margin: 15px;
+  padding-bottom: 20px;
     background-color: #ccc;
+    border-radius: 10px;
     border: 1px solid black;
     height: 400px;
     width: 300px;
 }
 
+.grid-item:hover {
+  border-radius: 10px;
+  border: 3px solid black;
+  font-weight: bold;
+  border-style: groove;
+}
+
 .photo {
+  border-radius: 8px;
   height: 300px;
   width: 100%
 }

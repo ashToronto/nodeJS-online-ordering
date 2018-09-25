@@ -16,13 +16,13 @@
     <% for (i in data){ %>
       <td>
         <div class="grid-item ">
-          <p> <strong> <%= data[i].item_name %> </strong></p>
           <div>
-            <p> $
-              <%= data[i].item_price %>
-            </p>
             <img class="photo" src="<%= data[i].item_photo_URL %>" />
           </div>
+          <p> <strong> <%= data[i].item_name %> </strong></p>
+          <p> $
+            <%= data[i].item_price %>
+          </p>
           <p>
             <%= data[i].item_description %>
           </p>
