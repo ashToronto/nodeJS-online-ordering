@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <title>Admin</title>
+    <link rel="stylesheet" type="text/css" href="welcome.css" />
     <link rel="stylesheet" type="text/css" href="/admin_items.css" />
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -15,22 +16,31 @@
     <h1>ADMIN ITEMS PAGE</h1>
     <div>
       <table>
-        <tr>
+        <thead>
+        <tr class="grid">
+        <th>Item</th>
+        <th>description</th>
+        <th>price</th>
+        <th>image</th>
+      </tr>
+    </thead>
+
       <% for (i in data){ %>
-      <td>
+        <tr class="grid">
         <td><p> <%= data[i].item_name %> </p></td>
         <td><p> <%= data[i].item_description %> </p></td>
-        <td><p> $ <%= data[i].item_price %> </p></td>
+        <td><p> $<%= data[i].item_price %> </p></td>
+        <td><img class="admin_photo" src= "<%= data[i].item_photo_URL %>"></td>
         <td>
         <form method="post" action="/admin/items/delete">
         <input type="text" name="item_id" value= "<%= data[i].item_id %>" readonly>
-        <input type="submit" value="DELETE">
+        <input class="button" type="submit" value="DELETE">
         <br>
       </td>
+      </tr>
       <tr></tr>
       </form>
         <% } %>
-          </tr>
       </table>
     </div>
     </body>

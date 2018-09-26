@@ -1,0 +1,10 @@
+.grid {
+  border: solid black;
+  width: 100%;
+  text-align: center;
+}
+
+.admin_photo {
+  height: 100px;
+  width: 25%
+}
