@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <title>Admin_create_items</title>
-
+    <link rel="stylesheet" type="text/css" href="/admin_items.css" />
+    <link rel="stylesheet" type="text/css" href="welcome.css" />
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
@@ -12,6 +13,7 @@
  <br><br><br><br><br><br><br><br><br>
     <h1>Create Menu items</h1>
     <p>CREATE ITEMS AND TAKE ORDERS GOES HERE</p>
+    <div class="container">
     <form method="POST" action="/admin/add" class = "standard" id="menuform">
        <h1>Add Menu Item</h1>
        Admin id set as:<br>
@@ -21,10 +23,11 @@
         Price:<br>
         <input type="number" name="price" step="0.25" min = "0"><br>
         Photo URL:<br>
-        <input type="text" name="photo_url"><br>
+        <input class="photo-url" type="text" name="photo_url"><br>
         Description:<br>
-        <textarea name="description" rows="4" cols="50" form="menuform"></textarea></br>
-      <input type="submit" id="submit" value="Add Item">
+        <textarea class="textarea" name="description" rows="4" cols="50" form="menuform"></textarea></br>
+      <input class="button" type="submit" id="submit" value="Add Item">
     </form>
+  </div>
     </body>
 </html>

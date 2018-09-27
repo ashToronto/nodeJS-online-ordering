@@ -2,9 +2,29 @@
   border: solid black;
   width: 100%;
   text-align: center;
+  font-size: medium;
 }
 
 .admin_photo {
   height: 100px;
   width: 25%
+}
+
+.textarea {
+  width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.photo-url {
+  width: 100%
+}
+
+.container {
+  border-radius: 5px;
+   background-color: #f2f2f2;
+   padding: 20px;
+   font-size: medium;
 }
