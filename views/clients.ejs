@@ -19,10 +19,10 @@
     </ul>
   </div>
 
-  <div class="sidenav">
+  <div id="sidenav" class="sidenav">
     CART YOUR ITEMS
   </div>
-  <div class="master-items--container">
+  <div id="main" class="master-items--container">
     <div class="grid-container">
       <% for (i in data){ %>
         <td>
@@ -49,7 +49,13 @@
 
 <!-- *************** JQUERRY CART TO ADD ITEMS ON CLICK *************** -->
 <script>
-$( "#add" ).click(function() {
-  alert( "Handler for .click() called." );
+$(document).ready(function(){
+  load();
+})
+
+
+$( "#main" ).on( "click", ".add", function() {
+  $("#sidenav").append("<p>TEST</p>")
 });
+
 </script>
