@@ -4,39 +4,52 @@
 <head>
   <title>clients</title>
   <link rel="stylesheet" type="text/css" href="/clients.css" />
+  <link type="text/css" rel="stylesheet" href="/navbar.css">
+  <link rel="stylesheet" type="text/css" href="welcome.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="js/scripts.js"></script>
 </head>
 
 <body>
-  <%- include partials/admin_navbar.ejs %>
-  <div class="sidenav">
-    CART
+  <div class="topnav">
+    <ul>
+      <li>
+        <a href="/">Home</a>
+      </li>
+    </ul>
   </div>
-<div class="master-items--container">
-  <div class="grid-container">
-    <% for (i in data){ %>
-      <td>
-        <div class="grid-item ">
-          <div>
-            <img class="photo" src="<%= data[i].item_photo_URL %>" />
-          </div>
-          <p> <strong> <%= data[i].item_name %> </strong></p>
 
-          <p class="shopper-text">
+  <div class="sidenav">
+    CART YOUR ITEMS
+  </div>
+  <div class="master-items--container">
+    <div class="grid-container">
+      <% for (i in data){ %>
+        <td>
+          <div class="grid-item ">
+            <div>
+              <img class="photo" src="<%= data[i].item_photo_URL %>" />
+            </div>
+            <span> <strong> <%= data[i].item_name %> </strong></span>
+
+            <span class="shopper-text">
             <%= data[i].item_description %>
-          </p>
-          <p> $
-            <%= data[i].item_price %>
-          </p>
-
-        </div>
-      </td>
-      <% } %>
-    </div>
+          </span>
+            <span class="price">$<%= data[i].item_price %></span>
+            <div class="add">
+              <button id="add" class="button">ADD</button>
+            </div>
           </div>
-
-
+        </td>
+        <% } %>
+    </div>
+  </div>
 </body>
-
 </html>
+
+<!-- *************** JQUERRY CART TO ADD ITEMS ON CLICK *************** -->
+<script>
+$( "#add" ).click(function() {
+  alert( "Handler for .click() called." );
+});
+</script>

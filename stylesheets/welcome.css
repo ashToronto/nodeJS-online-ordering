@@ -46,7 +46,7 @@
         background: rgba(204, 204, 204, 0.6);
       }
 
-      /* If you want the content centered horizontally and vertically */
+      /* content centered vertically */
 
       .centered {
         position: absolute;
