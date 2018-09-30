@@ -21,6 +21,7 @@
 
   <div id="sidenav" class="sidenav">
     CART YOUR ITEMS
+    <!-- CART ITEMS WILL TO BE INSERTED  -->
   </div>
   <div id="main" class="master-items--container">
     <div class="grid-container">
@@ -30,7 +31,7 @@
             <div>
               <img class="photo" src="<%= data[i].item_photo_URL %>" />
             </div>
-            <span> <strong> <%= data[i].item_name %> </strong></span>
+            <span id="item_name" class="item_name"> <strong> <%= data[i].item_name %> </strong></span>
 
             <span class="shopper-text">
             <%= data[i].item_description %>
@@ -49,13 +50,14 @@
 
 <!-- *************** JQUERRY CART TO ADD ITEMS ON CLICK *************** -->
 <script>
-$(document).ready(function(){
-  load();
-})
 
-
+// SELECT ITEMS BY CLASS AND APPEND TO CART
 $( "#main" ).on( "click", ".add", function() {
-  $("#sidenav").append("<p>TEST</p>")
+  let item_name = $(this).parent().find('.item_name').text();
+  let item_price = $(this).parent().find('.price').text();
+  let order = `<div><p>${item_name}</p><p>${item_price}</p></div>`;
+  $("#sidenav").append(order)
 });
+
 
 </script>
