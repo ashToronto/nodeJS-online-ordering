@@ -55,6 +55,7 @@
 
 <!-- *************** JQUERRY CART TO ADD ITEMS ON CLICK *************** -->
 <script>
+
 let total = [];
 // SELECT ITEMS BY CLASS AND APPEND NAME AND PRICE TO CART
 $( "#main" ).on( "click", ".add", function() {
@@ -74,9 +75,17 @@ $( "#main" ).on( "click", ".add", function() {
   $(".cart_item_price").append(price)
 
   // CART TOTAL OF ALL ITEM PRICES
-  total.push(item_price)
+  const x = item_price.replace('$', '')
+  const y = Number(x);
+  console.log(y)
+  console.log(typeof y)
+  total.push(y);
+  console.log(total)
+
+  function add(a, b) {
+    return a + b;
 }
-  $("#totalCost").text('$ ' + total);
+  $("#totalCost").text('$ ' + total.reduce(add, 0).toFixed(2));
 });
 
 
