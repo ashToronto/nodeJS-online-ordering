@@ -20,7 +20,12 @@
   </div>
 
   <div id="sidenav" class="sidenav">
-    CART YOUR ITEMS
+    <h4>CART</h4>
+    <table class="cart">
+      <th class="cart_item_name">name</th>
+      <th class="cart_item_price">price</th>
+      <p id="totalCost"></p>
+    </table>
     <!-- CART ITEMS WILL TO BE INSERTED  -->
   </div>
   <div id="main" class="master-items--container">
@@ -50,14 +55,30 @@
 
 <!-- *************** JQUERRY CART TO ADD ITEMS ON CLICK *************** -->
 <script>
-
-// SELECT ITEMS BY CLASS AND APPEND TO CART
+let total = [];
+// SELECT ITEMS BY CLASS AND APPEND NAME AND PRICE TO CART
 $( "#main" ).on( "click", ".add", function() {
   let item_name = $(this).parent().find('.item_name').text();
   let item_price = $(this).parent().find('.price').text();
-  let order = `<div><p>${item_name}</p><p>${item_price}</p></div>`;
-  $("#sidenav").append(order)
+  let item = `<div>
+  <tr>
+  <span>${item_name}</span>
+  </tr>
+  </div>`;
+  let price = `<div>
+  <tr>
+  <span>${item_price}</span>
+  </tr>
+  </div>`;
+  $(".cart_item_name").append(item)
+  $(".cart_item_price").append(price)
+
+  // CART TOTAL OF ALL ITEM PRICES
+  total.push(item_price)
+}
+  $("#totalCost").text('$ ' + total);
 });
+
 
 
 </script>

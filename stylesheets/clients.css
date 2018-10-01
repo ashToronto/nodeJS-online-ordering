@@ -53,6 +53,7 @@
     background-color: rgb(61, 122, 175); /* grey*/
     padding-top: 2%; /* Place content 60px from the top */
     color: white;
+    overflow-y: scroll;
 }
 
 .price {
@@ -63,4 +64,8 @@
   margin-left: 51%;
   margin-bottom: 5%;
   display: inline-block;
+}
+
+.cart {
+  font-size: small;
 }
