@@ -22,13 +22,9 @@
   <div id="sidenav" class="sidenav">
     <h4>CART</h4>
     <div id="cart" class="cart">
-    <form id = "form" class = "hide">
-    <table>
-      <th class="cart_item"></th>
-          <!-- CART ITEMS TO BE INSERTED HERE  -->
-            </table>
-       <p id="totalCost"></p>
+    <form id="form" class="hide">
         <input id = "submit" class="button" type="submit" value="Checkout"></input>
+        <p id="totalCost"></p>
        </form>
        </div>
   </div>
@@ -60,7 +56,6 @@
 
 <!-- *************** JQUERRY CART TO ADD ITEMS *************** -->
 <script>
-$(document).ready(function(){
 
   // SELECT ITEMS BY CLASS AND APPEND NAME AND PRICE TO CART
 let total = []; // array of cart items used for total cost calculation only
@@ -71,26 +66,13 @@ $( ".add" ).click(function() {
   <tr>
   <div>
   <span>${item_name}</span>
-    <span class="order_price" value="${item_price}">${item_price}</span>
+    <span id="order_price" class="order_price" value="${item_price}">${item_price}</span>
   <input id="order_quantity" class="order_quantity" name="order_quantity" type="number" min="1" max="5" value="1">
     <input type = "hidden" name = "order_name" value = ${item_name} />
   </div>
   </tr>
   </div>`;
-  $(".cart_item").append(item)
-
-  // CART TOTAL ON EACH NEW ITEM ADDED
-  const x = item_price.replace('$', '')
-  const convertPrice = Number(x); // Tconvert to number
-
-
-  // ADD LOGIC TO UPDATE QUANTITY ON CHANGE OF INPUT FIELD
-  $( ".order_quantity" ).change(function(){
-    const quantity = $( ".order_quantity" ).val() // Select quantity from items
-    const subTotal = quantity * convertPrice;
-    console.log("TESTING subTotal IS: " + subTotal)
-    $(this).parent().parent().find('.order_price').text('$ ' + subTotal.toFixed(2));
-  });
+  $("#form").prepend(item)
 
   console.log(typeof convertPrice) // Type is now a number
   total.push(subTotal); // Add to array of items
@@ -98,6 +80,18 @@ $( ".add" ).click(function() {
   function add(a, b) {return a + b;}
   $("#totalCost").text('$ ' + total.reduce(add, 0).toFixed(2)); // Sum of all items in cart
 });
+
+// UPDATE PRICE OF LINE ITEMS
+$(".cart").on( "change", ".order_quantity", function() {
+  const quantity = $(this).parent().find('.order_quantity').val(); // Select quantity from items
+  console.log(quantity)
+  const newPriceString = $(this).parent().parent().find('.order_price').attr("value");
+  const x = newPriceString.replace('$', '') // Format string without $ sign
+  const newPrice = Number(x); // convert price string to number
+  console.log(newPrice)
+  const total = quantity * newPrice;
+  console.log(total)
+  $(this).parent().parent().find('.order_price').text('$ ' + total.toFixed(2)); // replace item with new item price
 });
 
 </script>
