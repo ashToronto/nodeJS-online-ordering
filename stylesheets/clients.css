@@ -69,3 +69,16 @@
 .cart {
   font-size: small;
 }
+
+.cart_item_box {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.order_price {
+  margin: 10px;
+}
+
+.quantity {
+  margin-left: 30px;
+}
