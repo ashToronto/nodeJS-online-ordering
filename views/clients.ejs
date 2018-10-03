@@ -56,13 +56,11 @@
 
 <!-- *************** JQUERRY CART TO ADD ITEMS *************** -->
 <script>
-
-  // SELECT ITEMS BY CLASS AND APPEND NAME AND PRICE TO CART
-let total = []; // array of cart items used for total cost calculation only
+// SELECT ITEMS BY CLASS AND APPEND NAME AND PRICE TO CART
 $( ".add" ).click(function() {
-  let item_name = $(this).parent().find('.item_name').text();
-  let item_price = $(this).parent().find('.price').text();
-  let item = `<div class="cart_item_box">
+  const item_name = $(this).parent().find('.item_name').text();
+  const item_price = $(this).parent().find('.price').text();
+  const products = `<div id="cart_item_box" class="cart_item_box">
   <tr>
   <div>
   <span>${item_name}</span>
@@ -70,15 +68,10 @@ $( ".add" ).click(function() {
   <input id="order_quantity" class="order_quantity" name="order_quantity" type="number" min="1" max="5" value="1">
     <input type = "hidden" name = "order_name" value = ${item_name} />
   </div>
+  <button id="delete_cart_item" class="delete_cart_item">DELETE</button>
   </tr>
   </div>`;
-  $("#form").prepend(item)
-
-  console.log(typeof convertPrice) // Type is now a number
-  total.push(subTotal); // Add to array of items
-  console.log(total)
-  function add(a, b) {return a + b;}
-  $("#totalCost").text('$ ' + total.reduce(add, 0).toFixed(2)); // Sum of all items in cart
+  $("#form").prepend(products)
 });
 
 // UPDATE PRICE OF LINE ITEMS
@@ -86,12 +79,30 @@ $(".cart").on( "change", ".order_quantity", function() {
   const quantity = $(this).parent().find('.order_quantity').val(); // Select quantity from items
   console.log(quantity)
   const newPriceString = $(this).parent().parent().find('.order_price').attr("value");
-  const x = newPriceString.replace('$', '') // Format string without $ sign
-  const newPrice = Number(x); // convert price string to number
+  const replace = newPriceString.replace('$', '') // Format string without $ sign
+  const newPrice = Number(replace); // convert price string to number
   console.log(newPrice)
   const total = quantity * newPrice;
   console.log(total)
-  $(this).parent().parent().find('.order_price').text('$ ' + total.toFixed(2)); // replace item with new item price
+  $(this).parent().find('.order_price').text('$ ' + total.toFixed(2)); // replace item with new item price
 });
+
+// Delete an item from cart
+$('.cart').on( "click", ".delete_cart_item", function(){
+  $(this).parent().remove() // Delete parent line item 
+})
+
+// CART SUM tOTAL
+$(document).click(function(){
+        let total = 0;
+          $('.order_price').each(function() {
+            const priceString = $(this).text();
+            const replace = priceString.replace('$', '') // Format string without $ sign
+            const final_price = Number(replace) // convert to string
+              console.log(final_price)
+              total += final_price;
+          });
+          $("#totalCost").text('$ ' + total.toFixed(2)); // Sum of all items in cart
+      });
 
 </script>
