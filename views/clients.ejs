@@ -23,8 +23,10 @@
     <h4>CART</h4>
     <div id="cart" class="cart">
     <form id="form" class="hide">
-        <input id = "submit" class="button" type="submit" value="Checkout"></input>
-        <p id="totalCost"></p>
+      <div class="order">
+        <!-- CART ITEMS APPENDED HERE  -->
+        <input id="totalCost" class="button" type="submit" value="0.00">
+      </div>
        </form>
        </div>
   </div>
@@ -43,7 +45,7 @@
             <%= data[i].item_description %>
           </span>
             <span class="price">$<%= data[i].item_price %></span>
-            <div class="add">
+            <div id="add" class="add">
               <button class="button">ADD</button>
             </div>
           </div>
@@ -63,7 +65,7 @@ $( ".add" ).click(function() {
   const products = `<div id="cart_item_box" class="cart_item_box">
   <tr>
   <div>
-  <span>${item_name}</span>
+  <span id="order_item" class="order_item">${item_name}</span>
     <span id="order_price" class="order_price" value="${item_price}">${item_price}</span>
   <input id="order_quantity" class="order_quantity" name="order_quantity" type="number" min="1" max="5" value="1">
     <input type = "hidden" name = "order_name" value = ${item_name} />
@@ -71,38 +73,40 @@ $( ".add" ).click(function() {
   <button id="delete_cart_item" class="delete_cart_item">DELETE</button>
   </tr>
   </div>`;
-  $("#form").prepend(products)
+  $(".order").prepend(products)
+  $(this).hide("#addItem")
 });
 
 // UPDATE PRICE OF LINE ITEMS
-$(".cart").on( "change", ".order_quantity", function() {
+$(".cart").on( "click", ".order_quantity", function() {
   const quantity = $(this).parent().find('.order_quantity').val(); // Select quantity from items
-  console.log(quantity)
   const newPriceString = $(this).parent().parent().find('.order_price').attr("value");
   const replace = newPriceString.replace('$', '') // Format string without $ sign
   const newPrice = Number(replace); // convert price string to number
-  console.log(newPrice)
   const total = quantity * newPrice;
-  console.log(total)
   $(this).parent().find('.order_price').text('$ ' + total.toFixed(2)); // replace item with new item price
 });
 
-// Delete an item from cart
+// DELETE ITEM LINE FROM CART
 $('.cart').on( "click", ".delete_cart_item", function(){
-  $(this).parent().remove() // Delete parent line item 
+  $(this).parent().remove() // Delete parent line item
+  const product_name = $(this).parent().find('.order_item').text();
+  $(".grid-item").find("span:contains("+product_name+")").parent().children('#add').show(".button") // Retrieve add button
 })
 
 // CART SUM tOTAL
 $(document).click(function(){
         let total = 0;
           $('.order_price').each(function() {
-            const priceString = $(this).text();
-            const replace = priceString.replace('$', '') // Format string without $ sign
+            const replace = $(this).text().replace('$', '') // Format string without $ sign
             const final_price = Number(replace) // convert to string
-              console.log(final_price)
               total += final_price;
           });
-          $("#totalCost").text('$ ' + total.toFixed(2)); // Sum of all items in cart
+          $("#totalCost").val('CHECKOUT: $ ' + total.toFixed(2)); // Sum of all items in cart
       });
 
+// SUBMIT CART FOR AJAX POST TO SERVER
+$('.order').on( "click", "#totalCost", function(){
+  alert("checkout list an payment method")
+})
 </script>

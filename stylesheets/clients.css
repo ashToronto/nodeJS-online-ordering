@@ -82,3 +82,7 @@
 .quantity {
   margin-left: 30px;
 }
+
+.inactive{
+  display: hidden;
+}
