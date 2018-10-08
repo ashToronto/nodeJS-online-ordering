@@ -45,15 +45,15 @@
 }
 
 .sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 20%; /* 0 width - change this with JavaScript */
+    height: 100%; /* 90% so that bottom checkout doesn't get cut off */
+    width: 20%;
     position: fixed; /* Stay in place */
     top: 8%; /* Stay at the top */
     left: 0;
     background-color: rgb(61, 122, 175); /* grey*/
     padding-top: 2%; /* Place content 60px from the top */
     color: white;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .price {
@@ -70,9 +70,8 @@
   font-size: small;
 }
 
-.cart_item_box {
-  padding-bottom: 10px;
-  padding-top: 10px;
+.order_item {
+  font-weight: bold;
 }
 
 .order_price {
@@ -83,6 +82,11 @@
   margin-left: 30px;
 }
 
-.inactive{
-  display: hidden;
+.cart_item_box {
+  border-style: groove;
+  margin: 20%;
+}
+
+#totalCost {
+  margin-bottom: 7rem;
 }

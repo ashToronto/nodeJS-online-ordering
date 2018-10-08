@@ -16,13 +16,16 @@
       <li>
         <a href="/">Home</a>
       </li>
+      <li>
+        <input id="myInput" type="text" placeholder="Search..">
+      </li>
     </ul>
   </div>
 
   <div id="sidenav" class="sidenav">
     <h4>CART</h4>
     <div id="cart" class="cart">
-    <form id="form" class="hide">
+    <form id="form">
       <div class="order">
         <!-- CART ITEMS APPENDED HERE  -->
         <input id="totalCost" class="button" type="submit" value="0.00">
@@ -40,7 +43,7 @@
             <div>
               <img class="photo" src="<%= data[i].item_photo_URL %>" />
             </div>
-            <span id="item_name" class="item_name"> <strong> <%= data[i].item_name %> </strong></span>
+            <span id="item_name" class="item_name"> <%= data[i].item_name %> </span>
             <span class="shopper-text">
             <%= data[i].item_description %>
           </span>
@@ -58,6 +61,11 @@
 
 <!-- *************** JQUERRY CART TO ADD ITEMS *************** -->
 <script>
+
+$( document ).ready(function() {
+    $("#totalCost").hide() // Keep cart total hidden until add is clicked
+});
+
 // SELECT ITEMS BY CLASS AND APPEND NAME AND PRICE TO CART
 $( ".add" ).click(function() {
   const item_name = $(this).parent().find('.item_name').text();
@@ -73,8 +81,11 @@ $( ".add" ).click(function() {
   <button id="delete_cart_item" class="delete_cart_item">DELETE</button>
   </tr>
   </div>`;
-  $(".order").prepend(products)
-  $(this).hide("#addItem")
+
+  $(".order").prepend(products) // Add a new item line
+  $('#cart_item_box').hide().fadeIn() // Effect on items
+  $(this).hide(".button") // Hide add button, no need for duplicates check
+  $("#totalCost").fadeIn() // Reveal checkout total
 });
 
 // UPDATE PRICE OF LINE ITEMS
@@ -91,15 +102,15 @@ $(".cart").on( "click", ".order_quantity", function() {
 $('.cart').on( "click", ".delete_cart_item", function(){
   $(this).parent().remove() // Delete parent line item
   const product_name = $(this).parent().find('.order_item').text();
-  $(".grid-item").find("span:contains("+product_name+")").parent().children('#add').show(".button") // Retrieve add button
+  $(".grid-item").find("span:contains("+product_name+")").parent().find('#add').show(".button") // Retrieve add button
 })
 
 // CART SUM tOTAL
 $(document).click(function(){
         let total = 0;
           $('.order_price').each(function() {
-            const replace = $(this).text().replace('$', '') // Format string without $ sign
-            const final_price = Number(replace) // convert to string
+            const priceString = $(this).text().replace('$', '') // Removing $ sign from price string
+            const final_price = Number(priceString) // Convert string to number
               total += final_price;
           });
           $("#totalCost").val('CHECKOUT: $ ' + total.toFixed(2)); // Sum of all items in cart
@@ -109,4 +120,17 @@ $(document).click(function(){
 $('.order').on( "click", "#totalCost", function(){
   alert("checkout list an payment method")
 })
+
+// SEARCH FILTER CURRENTLY FINDS ITEMS AND LOGS THEM IN BROWSER
+$("#myInput").on("change", function() {
+  const search = $(this).val()
+  console.log(search)
+  const listItem = $(".grid-item").children(".item_name");
+  const x = $(".grid-item").find("span:contains("+search+")").parent().find(".item_name").text()
+  console.log(x)
+  if (!x){
+    // Remove all elements
+  }
+});
+
 </script>
