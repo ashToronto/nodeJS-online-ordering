@@ -122,15 +122,23 @@ $('.order').on( "click", "#totalCost", function(){
 })
 
 // SEARCH FILTER CURRENTLY FINDS ITEMS AND LOGS THEM IN BROWSER
-$("#myInput").on("change", function() {
+$("#myInput").on("keyup", function() {
   const search = $(this).val()
-  console.log(search)
-  const listItem = $(".grid-item").children(".item_name");
-  const x = $(".grid-item").find("span:contains("+search+")").parent().find(".item_name").text()
-  console.log(x)
-  if (!x){
-    // Remove all elements
+  console.log("search: ", search)
+  if (search === ""){
+    $(".grid-item").show()
   }
+  const listItem = $(".grid-item").children(".item_name");
+  const searchResult = $(".grid-item").find("span:contains("+search+")").parent().find(".item_name").text()
+  console.log("search Result: ", searchResult)
+   for (i = 0; i < listItem.length; i++) {
+    const matchedItem = listItem[i].innerHTML
+    // Hide matched items
+    if (searchResult === matchedItem){
+      $(".grid-item").hide()
+      $(".grid-item").find("span:contains("+search+")").parent().find('#item_name').parent().show()
+    }
+   }
 });
 
 </script>
