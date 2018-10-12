@@ -73,7 +73,7 @@ $( ".add" ).click(function() {
   const products = `<div id="cart_item_box" class="cart_item_box">
   <tr>
   <div>
-  <span id="order_item" class="order_item">${item_name}</span>
+  <span id="order_item" class="order_item" value=${item_name}>${item_name}</span>
     <span id="order_price" class="order_price" value="${item_price}">${item_price}</span>
   <input id="order_quantity" class="order_quantity" name="order_quantity" type="number" min="1" max="5" value="1">
     <input type = "hidden" name = "order_name" value = ${item_name} />
@@ -116,11 +116,6 @@ $(document).click(function(){
           $("#totalCost").val('CHECKOUT: $ ' + total.toFixed(2)); // Sum of all items in cart
       });
 
-// SUBMIT CART FOR AJAX POST TO SERVER
-$('.order').on( "click", "#totalCost", function(){
-  alert("checkout list an payment method")
-})
-
 // SEARCH FILTER CURRENTLY FINDS ITEMS AND LOGS THEM IN BROWSER
 $("#myInput").on("keyup", function() {
   const search = $(this).val()
@@ -133,12 +128,31 @@ $("#myInput").on("keyup", function() {
   console.log("search Result: ", searchResult)
    for (i = 0; i < listItem.length; i++) {
     const matchedItem = listItem[i].innerHTML
-    // Hide matched items
     if (searchResult === matchedItem){
       $(".grid-item").hide()
       $(".grid-item").find("span:contains("+search+")").parent().find('#item_name').parent().show()
     }
    }
+});
+
+
+// SUBMIT CART FOR AJAX POST TO SERVER
+// SEND DATA USING JSON STRINGIFY
+// USING SERIALIZE ARRAY
+// SEND EVERYTHING INCLUDING ITEM_ID TO SERVER
+$('#form').on( "submit", function(e){
+  e.preventDefault();
+  const order = $(this).serializeArray()
+  const quantity = $(this).find('.order_quantity').val();
+  const item_price = $(this).find('.order_price').text();
+  console.log(quantity)
+  const result = { };
+  $.each(order, function() {
+      result[this.value] = [quantity, item_price]
+  });
+  console.log( "Order items: ", result)
+  console.log($("#totalCost").val().replace('CHECKOUT: $ ', '')) // convverted to number format but haven't actually changed type
+
 });
 
 </script>

@@ -13,5 +13,9 @@ module.exports = (knex) => {
     })
   });
 
+  router.get("shoppers/checkout", (req, res) => {
+    res.send("CHECKOUT SUCCESSFUL")
+  });
+
   return router;
 }
