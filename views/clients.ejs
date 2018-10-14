@@ -44,6 +44,7 @@
               <img class="photo" src="<%= data[i].item_photo_URL %>" />
             </div>
             <span id="item_name" class="item_name"> <%= data[i].item_name %> </span>
+              <input type="hidden" id="item_id" class="item_id" value="<%= data[i].item_id %>">
             <span class="shopper-text">
             <%= data[i].item_description %>
           </span>
@@ -70,13 +71,15 @@ $( document ).ready(function() {
 $( ".add" ).click(function() {
   const item_name = $(this).parent().find('.item_name').text();
   const item_price = $(this).parent().find('.price').text();
+  const item_id = $(this).parent().find('.item_id').val();
   const products = `<div id="cart_item_box" class="cart_item_box">
   <tr>
   <div>
   <span id="order_item" class="order_item" value=${item_name}>${item_name}</span>
     <span id="order_price" class="order_price" value="${item_price}">${item_price}</span>
-  <input id="order_quantity" class="order_quantity" name="order_quantity" type="number" min="1" max="5" value="1">
-    <input type = "hidden" name = "order_name" value = ${item_name} />
+  <input id="order_quantity" class="order_quantity" name="items[]" type="number" min="1" max="5" value="1">
+    <input type = "hidden" name="items[]" value = ${item_name} />
+    <input type="hidden" id="item_id" class="item_id" name="items[]" value=${item_id}>
   </div>
   <button id="delete_cart_item" class="delete_cart_item">DELETE</button>
   </tr>
@@ -140,19 +143,33 @@ $("#myInput").on("keyup", function() {
 // SEND DATA USING JSON STRINGIFY
 // USING SERIALIZE ARRAY
 // SEND EVERYTHING INCLUDING ITEM_ID TO SERVER
+$( document ).ready(function() {
 $('#form').on( "submit", function(e){
   e.preventDefault();
   const order = $(this).serializeArray()
-  const quantity = $(this).find('.order_quantity').val();
-  const item_price = $(this).find('.order_price').text();
-  console.log(quantity)
-  const result = { };
-  $.each(order, function() {
-      result[this.value] = [quantity, item_price]
+  const result = [];
+  $.each(order, function(i) {
+      result[i] = this.value
   });
-  console.log( "Order items: ", result)
-  console.log($("#totalCost").val().replace('CHECKOUT: $ ', '')) // convverted to number format but haven't actually changed type
+  const order_content = result.toString()
 
+  console.log( "Order items: ", order_content)
+  const order_total = $("#totalCost").val().replace('CHECKOUT: $ ', '') // convverted to number format but haven't actually changed type
+
+  fetch(`/clients/shoppers/checkout`, {
+      method: "POST",
+      body: JSON.stringify({
+        total_price: order_total,
+        items: order_content
+      }),
+      headers: {
+        'Content-type': 'application/json'
+      },
+      credentials: 'include',
+    }).then(result => {
+      alert("done")
+    })
+  });
 });
 
 </script>
