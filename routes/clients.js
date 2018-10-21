@@ -14,11 +14,13 @@ module.exports = (knex) => {
   });
 
   router.get("/shoppers/checkout", (req, res) => {
-    res.send("CHECKOUT SUCCESSFUL")
+    res.render('clients_checkout')
   });
 
   router.post("/shoppers/checkout", (req, res) => {
-    console.log("order items: ", req.body)
+    const product = req.body.items.items_quantity
+    console.log(req.body)
+    res.redirect("/shoppers/checkout")
   });
 
   return router;
