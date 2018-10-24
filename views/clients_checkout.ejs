@@ -12,6 +12,21 @@
 
 <body>
 <h1>CHECKOUT SELECT A PAYMENT METHOD</h1>
+
+<% for (i in item_summary_name) { %>
+ <p><%= item_summary_name[i] %></p>
+<% } %>
+
+<% for (i in items_summary_quantity) { %>
+ <p><%= items_summary_quantity[i] %></p>
+<% } %>
+
+<% for (i in item_summary_price) { %>
+ <p><%= item_summary_price[i] %></p>
+<% } %>
+
+<p>Total Price: <%= checkout_total %></p>
+
 </body>
 
 </html>

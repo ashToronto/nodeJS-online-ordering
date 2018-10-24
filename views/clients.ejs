@@ -140,24 +140,15 @@ $("#myInput").on("keyup", function() {
    }
 });
 
-// SUBMIT CART FOR POST TO SERVER
-// SEND DATA USING JSON STRINGIFY
-// USING SERIALIZE ARRAY
-// SEND EVERYTHING INCLUDING ITEM_ID TO SERVER
 $( document ).ready(function() {
 $('#form').on( "submit", function(e){
   e.preventDefault();
-
-  // Auto serializes cart form into array of objects by input name
   const order = $(this).serializeArray()
-
-  // Prepare object to be posted
   const result = Object.create(null);
   for (const {name, value} of order) {
     (result[name] = result[name] || []).push(value);
   }
   console.log(result);
-  // Total Cost - convverted to number format but haven't actually changed type
   const order_total = $("#totalCost").val().replace('CHECKOUT: $ ', '')
   fetch(`/clients/shoppers/checkout`, {
       method: "POST",

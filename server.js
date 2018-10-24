@@ -1,5 +1,5 @@
 const express         = require("express");
-const PORT            = 5000;
+const PORT            = 3000;
 const bodyParser      = require("body-parser");
 const cookieSession   = require("cookie-session");
 const bcrypt          = require('bcryptjs');
