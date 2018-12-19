@@ -83,10 +83,18 @@
 }
 
 .cart_item_box {
-  border-style: groove;
-  margin: 20%;
+  margin: 10%;
 }
 
 #totalCost {
   margin-bottom: 7rem;
+}
+
+.circle {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  float: left;
+  margin-right: 15px;
+  overflow: hidden; }
 }

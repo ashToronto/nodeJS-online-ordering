@@ -5,27 +5,62 @@
   <title>clients</title>
   <link rel="stylesheet" type="text/css" href="/clients.css" />
   <link type="text/css" rel="stylesheet" href="/navbar.css">
-  <link rel="stylesheet" type="text/css" href="welcome.css" />
+  <link rel="stylesheet" type="text/css" href="/welcome.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="js/scripts.js"></script>
 </head>
 
 <body>
-<h1>CHECKOUT SELECT A PAYMENT METHOD</h1>
+  <div class="topnav">
+    <ul>
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="/clients/shoppers">Catelogue</a>
+      </li>
+    </ul>
+  </div>
 
+<div class="split left">
+  <h3 class="middle">Order Online</h3>
+<table>
+
+<td>
 <% for (i in item_summary_name) { %>
  <p><%= item_summary_name[i] %></p>
 <% } %>
+</td>
 
+<td>
 <% for (i in items_summary_quantity) { %>
  <p><%= items_summary_quantity[i] %></p>
 <% } %>
+</td>
 
+<td>
 <% for (i in item_summary_price) { %>
  <p><%= item_summary_price[i] %></p>
 <% } %>
+</td>
 
+</table>
 <p>Total Price: <%= checkout_total %></p>
+  </div>
+
+<div class="split right">
+  <script
+      src="https://checkout.stripe.com/checkout.js"
+      class="stripe-button"
+      data-key="pk_test_LklcPkZ3Mra61WCY47f5uKPI"
+      data-amount="<%= checkout_total * 100%>"
+      data-name="Demo Site"               data-description="Example charge"
+      data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+      data-locale="auto"
+      data-currency="cad">
+    </script>
+  </div>
+
 
 </body>
 

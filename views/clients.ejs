@@ -41,9 +41,9 @@
       <% for (i in data){ %>
         <td>
           <div class="grid-item ">
-            <div>
+
               <img class="photo" src="<%= data[i].item_photo_URL %>" />
-            </div>
+
             <span id="item_name" class="item_name"> <%= data[i].item_name %> </span>
               <input type="hidden" id="item_id" class="item_id" value="<%= data[i].item_id %>">
             <span class="shopper-text">
@@ -73,9 +73,14 @@ $( ".add" ).click(function() {
   const item_name = $(this).parent().find('.item_name').text();
   const item_price = $(this).parent().find('.price').text();
   const item_id = $(this).parent().find('.item_id').val();
+
+  const image = $(this).parent().find('img').attr('src');
+
+  // SHOPPING CART ITEMS -- STYLING REQUIRED
   const products = `<div id="cart_item_box" class="cart_item_box">
   <tr>
   <div>
+  <img class="circle" src=${image}>
   <span id="order_item" class="order_item" value=${item_name}>${item_name}</span>
     <span id="order_price" class="order_price" value="${item_price}">${item_price}</span>
   <input id="order_quantity" class="order_quantity" name="items_quantity" type="number" min="1" max="5" value="1">

@@ -13,7 +13,7 @@ module.exports = (knex) => {
     })
   });
 
-const global_item_db = [];
+let global_item_db = [];
 // NEED TO PERSIST DATA FROM GET AND POST SO NEW PAGE CAN RE RENDER IT
   router.get("/shoppers/checkout", (req, res) => {
     const templateVars = {
@@ -22,12 +22,13 @@ const global_item_db = [];
       item_summary_price: global_item_db[0].items.item_price,
       checkout_total: global_item_db[0].total_price
     }
-    console.log(global_item_db[0])
+    console.log("global item db: here: " + global_item_db[0])
     res.render("clients_checkout", templateVars)
   });
 
   router.post("/shoppers/checkout", (req, res) => {
     const products = req.body
+    global_item_db = []
     //Push items into global array to render on new page
     global_item_db.push(products)
     res.redirect("shoppers/checkout")
